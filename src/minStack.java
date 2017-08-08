@@ -1,7 +1,9 @@
 /**
  * Created by jiangweiwei on 17-8-6.
  */
+import java.util.Stack;
 public class minStack {
+    Stack<Integer> s = new Stack<>();
     private myStack<Integer> minstack = new myStack<Integer>();
     private myStack<Integer> dataStack = new myStack<Integer>();
 
@@ -18,12 +20,15 @@ public class minStack {
         if (dataStack.length == 0 || minstack.length == 0){
             return null;
         }
-        dataStack.pop();
-
+        minstack.pop();
+        return dataStack.pop();
     }
 
     public Integer min(){
-
+        if (minstack.length == 0){
+            return null;
+        }
+        return minstack.head.data;
     }
 }
 
