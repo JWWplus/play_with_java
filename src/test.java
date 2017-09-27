@@ -1,59 +1,43 @@
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
-import  java.time.LocalDateTime;
+public class test{
+    private static String name = "woobo";
+    private String num = "X001";
 
-public class test {
-    /* 静态变量 */
-    //public static String staticField = "静态变量";
-    /* 变量 */
-    public String field = "变量";
-    /* 静态初始化块 */
-    static {
-        //System.out.println( staticField );
-        System.out.println( "静态初始化块" );
-    }
-    public static String staticField = "静态变量";
-    /* 初始化块 */
-    {
-        System.out.println(staticField);
-        System.out.println( field );
-        System.out.println( "初始化块" );
-    }
-    /* 构造器 */
-    public test()
-    {
-        System.out.println( "构造器" );
+    // 静态内部类可以用public,protected,private修饰
+    static class Person {
+        // 静态内部类中可以定义静态或者非静态的成员
+        private String address = "China";
+
+        private static String x = "as";
+        public String mail = "kongbowoo@yahoo.com.cn";// 内部类公有成员
+
+        public void display() {
+            // System.out.println(num);//不能直接访问外部类的非静态成员
+
+            // 静态内部类不能访问外部类的非静态成员(包括非静态变量和非静态方法)
+            System.out.println(name);// 只能直接访问外部类的静态成员
+
+            // 静态内部类只能访问外部类的静态成员(包括静态变量和静态方法)
+            System.out.println("Inner " + address);// 访问本内部类成员。
+        }
     }
 
+    public void printInfo() {
+        Person person = new Person();
+
+        // 外部类访问内部类的非静态成员:实例化内部类即可
+        person.display();
+
+        // System.out.println(mail);//不可访问
+        // System.out.println(address);//不可访问
+        System.out.println(person.address);// 可以访问内部类的私有成员
+
+        System.out.println(Person.x);// 外部类访问内部类的静态成员：内部类.静态成员
+        System.out.println(person.mail);// 可以访问内部类的公有成员
+    }
 
     public static void main(String[] args) {
-        String s1 = "Programming";
-        String s2 = new String("Programming");
-        String s3 = "Program";
-        String s4 = "ming";
-        String s5 = "Program" + "ming";
-
-        String s6 = s3 + s4;
-        System.out.println(s1 == s2);
-        System.out.println(s1 == s5);
-        System.out.println(s1 == s6);
-        System.out.println(Integer.parseInt("5"));
-        System.out.println(s1 == s6.intern());
-        System.out.println(s2 == s2.intern());
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("jiangweiwei");
-        stringBuilder.reverse();
-        LocalDateTime dt = LocalDateTime.now();
-        System.out.println(dt.getYear());
-        System.out.println(dt.getMonthValue());     // 1 - 12
-        System.out.println(dt.getDayOfMonth());
-        System.out.println(dt.getHour());
-        System.out.println(dt.getMinute());
-        System.out.println(dt.getSecond());
-        System.currentTimeMillis();
-        Calendar calendar = Calendar.getInstance();
-        s1.compareTo("a");
+        test staticTest = new test();
+        staticTest.printInfo();
+        System.out.println(test.Person.x);
     }
 }
