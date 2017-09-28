@@ -66,7 +66,7 @@ class Singleton_v5 {
     }
 
     public static Singleton_v5 getinstance(){
-        return Singletonholder.instance;
+        return Singletonholder.instance; // 可以访问内部类的私有成员
     }
 }
 
